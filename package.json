@@ -1,13 +1,13 @@
 {
   "name": "mouse-hook",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Native Node.js module for hooking into mouse events",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "install": "node-gyp rebuild",
     "build": "tsc",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build && node-gyp rebuild",
     "clean": "rimraf dist build",
     "rebuild": "npm run clean && node-gyp rebuild && npm run build",
     "example": "ts-node examples/basic.ts",
@@ -40,7 +40,8 @@
     "node": ">=12.0.0"
   },
   "dependencies": {
-    "node-addon-api": "^3.2.0"
+    "node-addon-api": "^3.2.0",
+    "node-gyp": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "^16.18.126",

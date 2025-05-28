@@ -1,4 +1,5 @@
 import * as os from "os";
+import * as path from "path";
 
 // Only support macOS for now
 if (os.platform() !== "darwin") {
@@ -7,11 +8,24 @@ if (os.platform() !== "darwin") {
 
 // Load the native module
 const nativeBinding = (() => {
-  try {
-    return require("../../build/Release/mouse_hook.node");
-  } catch (err) {
-    return require("../../build/Debug/mouse_hook.node");
+  const possiblePaths = [
+    // Development paths (when running from source)
+    path.resolve(__dirname, "../../mouse-hook/build/Release/mouse_hook.node"),
+    path.resolve(__dirname, "../../mouse-hook/build/Debug/mouse_hook.node"),
+  ];
+
+  for (const modulePath of possiblePaths) {
+    try {
+      return require(modulePath);
+    } catch (err) {}
   }
+
+  throw new Error(
+    "Could not load native module mouse_hook.node. " +
+      "Make sure the module is properly compiled. " +
+      "Run 'npm install' or 'node-gyp rebuild' to build the native module. " +
+      `Searched paths: ${possiblePaths.join(", ")}`
+  );
 })();
 
 /**
