@@ -1,0 +1,21 @@
+# Development files
+src/ts/
+examples/
+tsconfig.json
+.git/
+.gitignore
+node_modules/
+
+# Build artifacts (keep only Release)
+build/Debug/
+build/*.mk
+build/Makefile
+build/binding.Makefile
+build/config.gypi
+build/gyp-mac-tool
+build/node_gyp_bins/
+build/obj.target/
+
+# Development dependencies
+*.log
+.DS_Store

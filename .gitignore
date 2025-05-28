@@ -1,0 +1,17 @@
+# Dependencies
+/node_modules
+
+# Build artifacts
+/build
+.node-gyp
+*.log
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+dist
